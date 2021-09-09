@@ -31,7 +31,7 @@ sudo su
 
 sudo docker pull elasticsearch:7.2.0
 
-docker run -d -p 9200:9200 -p 9300:9300  -it -h elasticsearch --name elasticsearch -e "discovery.type=single-node" elasticsearch:7.2.0
+sudo docker run -d -p 9200:9200 -p 9300:9300  -it -h elasticsearch --name elasticsearch -e "discovery.type=single-node" elasticsearch:7.2.0
 curl http://localhost:9200/
 
 ////***********************////
@@ -46,7 +46,7 @@ reboot your system
 Step 3: Setup Kibana container
 sudo docker pull kibana:7.2.0
 
-docker run -d  -p 5601:5601 -h kibana --name kibana --link elasticsearch:elasticsearch kibana:7.2.0
+sudo docker run -d  -p 5601:5601 -h kibana --name kibana --link elasticsearch:elasticsearch kibana:7.2.0
 
 curl http://localhost:9200/_cat/indices
 
@@ -55,7 +55,7 @@ Step 4: Create logstash config file and use it to setup Logstash container
 sudo docker pull logstash:7.2.0
 ////download logstash file from github
 
-docker run -h logstash --name logstash --link elasticsearch:elasticsearch -it --rm -v "$PWD":/config-dir logstash:7.2.0 -f /config-dir/logstash.conf
+sudo docker run -h logstash --name logstash --link elasticsearch:elasticsearch -it --rm -v "$PWD":/config-dir logstash:7.2.0 -f /config-dir/logstash.conf
 
 
 
